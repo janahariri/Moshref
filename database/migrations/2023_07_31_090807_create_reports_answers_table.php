@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateReportsAnswersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('reports_answers', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->linestring('question');
+            $table->linestring('answers');
+            $table->linestring('type');
+            $table->unsignedBigInteger('report_id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('reports_answers');
+    }
+}

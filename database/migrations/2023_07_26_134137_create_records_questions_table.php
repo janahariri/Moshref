@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReportsTypesTable extends Migration
+class CreateRecordsQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateReportsTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('reports_types', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('records_questions', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->string('content');
+            $table->unsignedBigInteger('type_id');
         });
     }
 
@@ -26,6 +27,6 @@ class CreateReportsTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reports_types');
+        Schema::dropIfExists('records_questions');
     }
 }
