@@ -14,7 +14,8 @@ class CreateRecordsTable extends Migration
     public function up()
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->id()->unique();
+            $table->timestamps();
             $table->datetime('submit_datetime');
             $table->unsignedBigInteger('batch_name');
             $table->string('order_status');
@@ -22,6 +23,7 @@ class CreateRecordsTable extends Migration
             $table->unsignedBigInteger('techsupervisor_id');
             $table->integer('cmap_label');
             $table->integer('office_number');
+
         });
     }
 

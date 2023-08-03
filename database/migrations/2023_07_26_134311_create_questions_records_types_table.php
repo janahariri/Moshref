@@ -14,7 +14,8 @@ class CreateQuestionsRecordsTypesTable extends Migration
     public function up()
     {
         Schema::create('questions_records_types', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->id()->unique();
+            $table->timestamps();
             $table->string('name');
         });
     }

@@ -14,7 +14,8 @@ class CreateRecordsAnswersTable extends Migration
     public function up()
     {
         Schema::create('records_answers', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->id()->unique();
+            $table->timestamps();
             $table->text('content');
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('record_id');

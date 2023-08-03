@@ -14,7 +14,8 @@ class CreateReportsAnswersTable extends Migration
     public function up()
     {
         Schema::create('reports_answers', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->id()->unique();
+            $table->timestamps();
             $table->linestring('question');
             $table->linestring('answers');
             $table->linestring('type');
