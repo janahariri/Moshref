@@ -27,7 +27,7 @@ Route::post('auth/login', [AuthController::class, 'loginUser']);
 //Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
 
 Route::get('user/show',[AuthController::class,'show']);
-Route::put('user/update',[AuthController::class,'update']);
+Route::post('user/update',[AuthController::class,'update']);
 
 Route::get('report/show',[ReportController::class,'show']);
 Route::post('report/store',[ReportController::class,'store']);

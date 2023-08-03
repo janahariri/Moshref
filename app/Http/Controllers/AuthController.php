@@ -113,13 +113,17 @@ class AuthController extends Controller
         }
     }
 
-
-
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = new User;
-        $user->password = $request->password;
+
+        $token = PersonalAccessToken::findToken($request->header("token"));
+        $user = User::find($token->tokenable->id);
+        $user->password = Hash::make($request->password);
         $user->save();
+        return response()->json([
+            'status' => true,
+            'message' =>"password updated Successfully",
+        ], 200);
     }
 
     public function show(Request $request){
