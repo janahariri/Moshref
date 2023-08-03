@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
@@ -122,15 +123,11 @@ class AuthController extends Controller
     }
 
     public function show(Request $request){
-       // $id = Auth::id();
-//dd($id);
-return $request->user();
-     $user = User::select("personal_photo", "full_name", "national_id", "phone_number", "email")->first();
-     return response()->json([
+        $token = PersonalAccessToken::findToken($request->header("token"));
+        $user = User::select("personal_photo", "full_name", "national_id", "phone_number", "email")->find($token->tokenable);
+        return response()->json([
         'status' => true,
         'data' =>$user
     ], 200);
     }
-
-
 }

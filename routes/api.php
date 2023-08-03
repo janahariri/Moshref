@@ -40,6 +40,6 @@ Route::post('record/store',[RecordAnswerController::class,'store']);
 
 Route::get('record/show',[RecordQuestionController::class,'show']);
 
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});*/
+});
