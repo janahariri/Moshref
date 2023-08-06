@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class questions_records_types extends Model
+class QuestionsRecordsTypes extends Model
 {
     use HasFactory;
+    public function recordQuestion(){
+        return $this->belongsTo(RecordQuestion::class);
+    }
 }

@@ -24,7 +24,7 @@ use App\Http\Controllers\RecordQuestionController;
 Route::post('auth/register', [AuthController::class, 'createUser']);
 Route::post('auth/login', [AuthController::class, 'loginUser']);
 
-//Route::apiResource('posts', PostController::class)->middleware('auth:sanctum');
+Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
 
 Route::get('user/show',[AuthController::class,'show']);
 Route::post('user/update',[AuthController::class,'update']);
@@ -33,7 +33,7 @@ Route::get('report/show',[ReportController::class,'show']);
 Route::post('report/store',[ReportController::class,'store']);
 
 Route::get('record/show',[RecordController::class,'show']);
-Route::get('record/showanalysis',[RecordController::class,'showanalysis']);
+Route::get('record/showAnalysis',[RecordController::class,'showAnalysis']);
 
 Route::get('record/show',[RecordAnswerController::class,'show']);
 Route::post('record/store',[RecordAnswerController::class,'store']);

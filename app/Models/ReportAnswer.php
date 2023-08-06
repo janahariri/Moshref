@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ReportAnswer extends Model
 {
     use HasFactory;
+
+    public function record(){
+        return $this->belongsTo(Record::class);
+    }
 }

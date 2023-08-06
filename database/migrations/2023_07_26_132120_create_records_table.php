@@ -18,8 +18,8 @@ class CreateRecordsTable extends Migration
             $table->timestamps();
             $table->datetime('submit_datetime');
             $table->unsignedBigInteger('batch_name');
-            $table->string('order_status');
-            $table->unsignedBigInteger('fieldsupervisor_id');
+            $table->string('order_status')->nullable();
+            $table->unsignedBigInteger('fieldsupervisor_id')->nullable();
             $table->unsignedBigInteger('techsupervisor_id');
             $table->integer('cmap_label');
             $table->integer('office_number');

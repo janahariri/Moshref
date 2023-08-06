@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class RecordAnswer extends Model
 {
     use HasFactory;
+
+    public function RecordQuestion(){
+        return $this->belongsTo(RecordQuestion::class);
+    }
 }

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OTPMail;
 
 class AuthController extends Controller
 {
@@ -33,7 +35,7 @@ class AuthController extends Controller
                 'national_id' => 'required|unique:users,national_id',
                 'personal_photo'=> 'string',
                 'phone_number'=> 'string',
-                'type'=> 'string'
+                'type'=> 'string',
             ]);
 
             if($validateUser->fails()){
@@ -68,11 +70,11 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Login The User
-     * @param Request $request
-     * @return User
-     */
+
+
+
+
+
     public function loginUser(Request $request)
     {
         try {
@@ -134,4 +136,51 @@ class AuthController extends Controller
         'data' =>$user
     ], 200);
     }
+
+
+
+
+
+
+
+
+
+    public function OTPpassword(Request $request){
+
+        try {
+            $validateUser = Validator::make($request->all(),
+            [
+                'email' => 'required',
+            ]);
+
+            if($validateUser->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+
+            $user = User::where('email', $request->email)->first();
+
+            if(is_null($user)){
+               return response()->json([
+                'status' => false,
+                'message' => 'Email does not match with our record',
+                'errors' => $validateUser->errors()
+            ], 404);
+            }
+
+            $token =mt_rand(0000,9999);
+            Mail::to($request->user())->send((new OTPMail($token,$user)));
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+
+            }
+    }
+
 }
