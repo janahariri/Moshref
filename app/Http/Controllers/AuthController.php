@@ -115,6 +115,10 @@ class AuthController extends Controller
         }
     }
 
+
+
+
+
     public function update(Request $request)
     {
 
@@ -127,6 +131,10 @@ class AuthController extends Controller
             'message' =>"password updated Successfully",
         ], 200);
     }
+
+
+
+
 
     public function show(Request $request){
         $token = PersonalAccessToken::findToken($request->header("token"));
