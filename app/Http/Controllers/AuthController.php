@@ -172,7 +172,11 @@ class AuthController extends Controller
             }
 
             $token =mt_rand(0000,9999);
-            Mail::to($request->user())->send((new OTPMail($token,$user)));
+            Mail::to($user->email)->send((new OTPMail($token,$user)));
+            return response()->json([
+                'status' => true,
+                'message' =>'OK'
+            ], 200);
 
         } catch (\Throwable $th) {
             return response()->json([
