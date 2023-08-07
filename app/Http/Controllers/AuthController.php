@@ -58,7 +58,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'national_id' => $request->national_id,
-                'personal_photo'=> "users_photos/".$filename,
+                'personal_photo'=> config('app.url')."/users_photos/".$filename,
                 'phone_number'=> $request->phone_number,
                 'type'=> $request->type
             ]);
