@@ -26,11 +26,11 @@ Route::post('auth/login', [AuthController::class, 'loginUser']);
 
 Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
 
-Route::get('user/show',[AuthController::class,'show']);
-Route::post('user/update',[AuthController::class,'update']);
+//Route::get('user/show',[AuthController::class,'show']);
+//Route::post('user/update',[AuthController::class,'update']);
 
-Route::get('report/show',[ReportController::class,'show']);
 Route::post('report/store',[ReportController::class,'store']);
+Route::get('report/show',[ReportController::class,'show']);
 
 Route::get('record/show',[RecordController::class,'show']);
 Route::get('record/showAnalysis',[RecordController::class,'showAnalysis']);

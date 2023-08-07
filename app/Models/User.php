@@ -65,10 +65,3 @@ class User extends Authenticatable
         return $this->hasMany(TechsupervisoridFieldsupervisorid::class,'fieldsupervisor_id','id');
     }
 }
-
-
-
-
-
-
-

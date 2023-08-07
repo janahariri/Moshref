@@ -17,7 +17,6 @@ class CreateRecordsTable extends Migration
             $table->id()->unique();
             $table->timestamps();
             $table->datetime('submit_datetime');
-            $table->unsignedBigInteger('batch_name');
             $table->string('order_status')->nullable();
             $table->unsignedBigInteger('fieldsupervisor_id')->nullable();
             $table->unsignedBigInteger('techsupervisor_id');

@@ -33,7 +33,7 @@ class AuthController extends Controller
                 'email' => 'email|unique:users,email',
                 'password' => 'required',
                 'national_id' => 'required|unique:users,national_id',
-                'personal_photo'=> 'string',
+                'personal_photo'=> 'image',
                 'phone_number'=> 'string',
                 'type'=> 'string',
             ]);
@@ -46,15 +46,23 @@ class AuthController extends Controller
                 ], 401);
             }
 
+
+            if ($request->file ('personal_photo') ){
+                $file= $request->file ('personal_photo');
+                $filename= date('YmdHi') .$file->getClientOriginalName () ;
+                $file-> move(public_path('users_photos'), $filename);
+            }
+
             $user = User::create([
                 'full_name' => $request->full_name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'national_id' => $request->national_id,
-                'personal_photo'=> $request->personal_photo,
+                'personal_photo'=> "users_photos".$filename,
                 'phone_number'=> $request->phone_number,
                 'type'=> $request->type
             ]);
+
 
             return response()->json([
                 'status' => true,
@@ -149,10 +157,6 @@ class AuthController extends Controller
 
 
 
-
-
-
-
     public function OTPpassword(Request $request){
 
         try {
@@ -179,7 +183,7 @@ class AuthController extends Controller
             ], 404);
             }
 
-            $token =mt_rand(0000,9999);
+            $token =mt_rand(1000,9999);
             Mail::to($user->email)->send((new OTPMail($token,$user)));
             return response()->json([
                 'status' => true,
