@@ -20,7 +20,7 @@ class CreateRecordsTable extends Migration
             $table->string('order_status')->nullable();
             $table->unsignedBigInteger('fieldsupervisor_id')->nullable();
             $table->unsignedBigInteger('techsupervisor_id');
-            $table->integer('cmap_label');
+            $table->string('cmap_label');
             $table->integer('office_number');
 
         });

@@ -4,14 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Laravel\Sanctum\HasApiTokens;
 
 
 class Record extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
     protected $table = "records";
+    protected $fillable = [
+        'submit_datetime',
+        'order_status',
+        'fieldsupervisor_id',
+        'techsupervisor_id',
+        'cmap_label',
+        'office_number',
+    ];
+
 
     public function fieldsupervisor(){
         return $this->belongsTo(User::class, 'id', 'fieldsupervisor_id');

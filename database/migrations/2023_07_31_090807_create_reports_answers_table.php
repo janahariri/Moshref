@@ -16,10 +16,10 @@ class CreateReportsAnswersTable extends Migration
         Schema::create('reports_answers', function (Blueprint $table) {
             $table->id()->unique();
             $table->timestamps();
-            $table->linestring('question');
-            $table->linestring('answers');
-            $table->linestring('type');
-            $table->unsignedBigInteger('report_id');
+            $table->string('question');
+            $table->text('answers');
+            $table->string('type');
+            $table->integer('report_id');
         });
     }
 

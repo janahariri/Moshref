@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\URecordController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RecordAnswerController;
 use App\Http\Controllers\RecordQuestionController;
 
@@ -21,24 +21,25 @@ use App\Http\Controllers\RecordQuestionController;
 |
 */
 
-Route::post('auth/register', [AuthController::class, 'createUser']);
-Route::post('auth/login', [AuthController::class, 'loginUser']);
+//Route::post('auth/register', [AuthController::class, 'createUser']);
+//Route::post('auth/login', [AuthController::class, 'loginUser']);
 
 Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
 
-Route::get('user/show',[AuthController::class,'show']);
-Route::post('user/update',[AuthController::class,'update']);
+//Route::get('user/show',[AuthController::class,'show']);
+//Route::post('user/update',[AuthController::class,'update']);
 
-Route::post('report/store',[ReportController::class,'store']);
+//Route::post('report/store',[ReportController::class,'store']);
 Route::get('report/show',[ReportController::class,'show']);
 
+Route::post('record/store',[RecordController::class,'store']);
 Route::get('record/show',[RecordController::class,'show']);
 Route::get('record/showAnalysis',[RecordController::class,'showAnalysis']);
 
-Route::get('record/show',[RecordAnswerController::class,'show']);
-Route::post('record/store',[RecordAnswerController::class,'store']);
+Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
+Route::get('recordAnswer/show',[RecordAnswerController::class,'show']);
 
-Route::get('record/show',[RecordQuestionController::class,'show']);
+Route::get('recordQuestion/show',[RecordQuestionController::class,'show']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
