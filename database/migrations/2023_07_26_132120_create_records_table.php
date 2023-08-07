@@ -15,7 +15,6 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id()->unique();
-            $table->timestamps();
             $table->datetime('submit_datetime');
             $table->string('order_status')->nullable();
             $table->unsignedBigInteger('fieldsupervisor_id')->nullable();

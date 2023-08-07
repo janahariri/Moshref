@@ -15,7 +15,6 @@ class CreateQuestionsRecordsTypesTable extends Migration
     {
         Schema::create('questions_records_types', function (Blueprint $table) {
             $table->id()->unique();
-            $table->timestamps();
             $table->string('name');
         });
     }

@@ -15,7 +15,6 @@ class CreateReportsAnswersTable extends Migration
     {
         Schema::create('reports_answers', function (Blueprint $table) {
             $table->id()->unique();
-            $table->timestamps();
             $table->string('question');
             $table->text('answers');
             $table->string('type');

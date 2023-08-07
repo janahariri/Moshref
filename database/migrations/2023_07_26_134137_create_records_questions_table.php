@@ -15,7 +15,6 @@ class CreateRecordsQuestionsTable extends Migration
     {
         Schema::create('records_questions', function (Blueprint $table) {
             $table->id()->unique();
-            $table->timestamps();
             $table->string('content');
             $table->unsignedBigInteger('type_id');
         });

@@ -62,7 +62,6 @@ class RecordController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
-
     }
 
 
@@ -98,66 +97,6 @@ class RecordController extends Controller
               return ("The Enterd Order Status Are not defined");
          }
      }
-
-
-
-
-/*
-        switch($order_status->records) {
-
-            case('Not viewed'):
-                $record=DB::table('records')->where('order_status', $order_status)->get();
-                return response()->json([
-                'records'=> $record
-                ]);
-                break;
-
-            case('Ignored'):
-                $record=DB::table('records')->where('order_status',$order_status)->get();
-                return response()->json([
-                'records'=> $record
-                ]);
-                break;
-
-            case('Send'):
-                $record=DB::table('records')->where('order_status',$order_status)->get();
-                return response()->json([
-                'records'=> $record
-                ]);
-                break;
-
-            case('Recorded'):
-                $record=DB::table('records')->where('order_status',$order_status)->get();
-                return response()->json([
-                'records'=> $record
-                ]);
-                break;
-
-            default:
-               $record = "The Enterd Order Status Are not defined";
-        }
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

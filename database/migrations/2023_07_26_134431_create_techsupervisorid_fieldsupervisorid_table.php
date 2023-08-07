@@ -15,7 +15,6 @@ class CreateTechsupervisoridFieldsupervisoridTable extends Migration
     {
         Schema::create('techsupervisorid_fieldsupervisorid', function (Blueprint $table) {
             $table->id()->unique();
-            $table->timestamps();
             $table->unsignedBigInteger('techsupervisor_id');
             $table->unsignedBigInteger('fieldsupervisor_id');
         });
