@@ -19,6 +19,7 @@ class CreateReportsAnswersTable extends Migration
             $table->text('answers');
             $table->string('type');
             $table->integer('report_id');
+            $table->timestamps();
         });
     }
 

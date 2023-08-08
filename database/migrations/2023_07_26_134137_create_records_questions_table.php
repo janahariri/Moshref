@@ -17,6 +17,7 @@ class CreateRecordsQuestionsTable extends Migration
             $table->id()->unique();
             $table->string('content');
             $table->unsignedBigInteger('type_id');
+            $table->timestamps();
         });
     }
 

@@ -17,6 +17,7 @@ class CreateTechsupervisoridFieldsupervisoridTable extends Migration
             $table->id()->unique();
             $table->unsignedBigInteger('techsupervisor_id');
             $table->unsignedBigInteger('fieldsupervisor_id');
+            $table->timestamps();
         });
     }
 

@@ -21,6 +21,7 @@ class CreateRecordsTable extends Migration
             $table->unsignedBigInteger('techsupervisor_id');
             $table->string('cmap_label');
             $table->integer('office_number');
+            $table->timestamps();
 
         });
     }

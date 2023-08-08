@@ -18,6 +18,7 @@ class CreateRecordsAnswersTable extends Migration
             $table->text('content');
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('record_id');
+            $table->timestamps();
         });
     }
 
