@@ -10,16 +10,7 @@ use App\Http\Controllers\RecordAnswerController;
 use App\Http\Controllers\RecordQuestionController;
 
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+//-------------------------مكتملة------------------------------------
 
 Route::post('auth/register', [AuthController::class, 'createUser']);
 Route::post('auth/login', [AuthController::class, 'loginUser']);
@@ -29,16 +20,22 @@ Route::post('user/update',[AuthController::class,'update']);
 
 Route::post('record/store',[RecordController::class,'store']);
 
-//--------------------------------------------------------------------
+//-----------اشتغل في السيرفر بس ناقص هندلة التخزين-----------------
+
+Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
+
+//----------اشتغل على اللوكل وباقي ما اشتغل عالسيرفر----------------
 
 Route::post('report/store',[ReportController::class,'store']);
 
 Route::get('record/show',[RecordController::class,'show']);
 
-//------------------------------------------------------------------------
+//-------------------------لسع ما سار----------------------------------
 
 
-Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
+Route::post('record/update',[RecordController::class,'update']);
+
+
 
 Route::get('report/show',[ReportController::class,'show']);
 

@@ -7,17 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-
 use Laravel\Sanctum\PersonalAccessToken;
 
 class RecordController extends Controller
 {
-
-    public function index()
-    {
-
-    }
-
 
 
     public function store(Request $request)
@@ -97,6 +90,24 @@ class RecordController extends Controller
               return ("The Enterd Order Status Are not defined");
          }
      }
+
+
+
+
+    public function update(Request $request){
+        $token = PersonalAccessToken::findToken($request->header("token"));
+        $Record = Record::find($token->tokenable->id);
+        $Record->order_status = $request->order_status;
+        $Record->save();
+        return response()->json([
+            'status' => true,
+            'message' =>"Order Status updated Successfully",
+        ], 200);
+
+     }
+
+
+
 
 
 
