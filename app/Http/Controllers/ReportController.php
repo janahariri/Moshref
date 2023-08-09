@@ -6,21 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\ReportAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
+use App\Models\Record;
+
 
 class ReportController extends Controller
 {
 
-    public function index()
-    {
-
-    }
-
-
-
-
-
     public function store(Request $request)
-    {
+{
         try {
             //Validated
             $validateReportAnswer = Validator::make($request->all(),
@@ -68,11 +63,4 @@ class ReportController extends Controller
             ], 500);
         }
     }
-
-
-    public function show($id){
-        return ReportAnswer::all();
-    }
-
-
 }

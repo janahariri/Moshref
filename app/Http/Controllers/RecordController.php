@@ -12,7 +12,6 @@ use Laravel\Sanctum\PersonalAccessToken;
 class RecordController extends Controller
 {
 
-
     public function store(Request $request)
     {
         try {
@@ -58,6 +57,81 @@ class RecordController extends Controller
     }
 
 
+    public function update(Request $request){
+        $token = PersonalAccessToken::findToken($request->header("token"));
+        $Record = Record::find($token->tokenable->id);
+        $Record->order_status = $request->order_status;
+        $Record->save();
+        return response()->json([
+            'status' => true,
+            'message' =>"Order Status updated Successfully",
+        ], 200);
+    }
+
+
+
+    public function show(Request $request){
+
+        $user = auth()->user();
+
+        switch ($request->header('type')) {
+
+        case 'Recorded':
+            if($user->isTechsupervisor()){
+                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                ->where('order_status','Sent')->get();
+            }else{
+                $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                ->where('order_status','Sent')->whereHas('recordAnswers')->get();
+            }
+            break;
+
+        case 'Ignored':
+            if($user->isTechsupervisor()){
+                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                ->where('order_status','Ignored')->get();
+            }
+
+            break;
+        default:
+
+        if($user->isTechsupervisor()){
+            $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+            ->where('order_status','Not viewed')->get();
+        }else{
+            $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+            ->where('order_status','Sent ')->get();
+        }
+
+            break;
+    }
+            return response()->json([
+            'data' =>$reportdata
+             ]);
+    }
+
+
+
+
+    public function index(Request $request){
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/*
+
     public function show(Request $request){
 
         if ($request->header('order_status') == 'Not viewed'){
@@ -74,7 +148,7 @@ class RecordController extends Controller
             ]);
          }
 
-         elseif ($request->header('order_status') == 'Send'){
+         elseif ($request->header('order_status') == 'Sent'){
             $record=DB::table('records')->where('order_status',$request->header('order_status'))->get();
             return response()->json([
             'records'=> $record
@@ -93,25 +167,8 @@ class RecordController extends Controller
 
 
 
-
-    public function update(Request $request){
-        $token = PersonalAccessToken::findToken($request->header("token"));
-        $Record = Record::find($token->tokenable->id);
-        $Record->order_status = $request->order_status;
-        $Record->save();
-        return response()->json([
-            'status' => true,
-            'message' =>"Order Status updated Successfully",
-        ], 200);
-
-     }
-
-
-
-
-
-
     public function showanalysis($id){
 
     }
-}
+
+*/
