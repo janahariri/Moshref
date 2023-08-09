@@ -68,8 +68,7 @@ class ReportController extends Controller
 
     public function show(Request $request){
 
-        $user = auth('sanctum')->user();
-
+       $user = auth('sanctum')->user();
        switch ($request->header('type')) {
 
         case 'Recorded':

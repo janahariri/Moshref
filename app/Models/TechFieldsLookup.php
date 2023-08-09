@@ -4,11 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class TechFieldsLookup extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $table ="tech_fields_lookup";
+    protected $fillable = [
+        'techsupervisor_id',
+        'fieldsupervisor_id',
+    ];
+
 
     public function Fieldsupervisor_records(){
         return $this->hasMany(Record::class,'fieldsupervisor_id', 'id');
