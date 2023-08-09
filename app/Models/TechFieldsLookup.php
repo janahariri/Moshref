@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TechsupervisoridFieldsupervisorid extends Model
+class TechFieldsLookup extends Model
 {
     use HasFactory;
+    protected $table ="tech_fields_lookup";
 
     public function Fieldsupervisor_records(){
         return $this->hasMany(Record::class,'fieldsupervisor_id', 'id');
@@ -17,9 +18,11 @@ class TechsupervisoridFieldsupervisorid extends Model
     }
 
     public function Techsupervisor_id_users(){
-        return $this->hasMany(TechsupervisoridFieldsupervisorid::class,'techsupervisor_id','id');
+        return $this->hasMany(TechFieldsLookup::class,'techsupervisor_id','id');
     }
     public function Fieldsupervisor_id_users(){
-        return $this->hasMany(TechsupervisoridFieldsupervisorid::class,'fieldsupervisor_id','id');
+        return $this->hasMany(TechFieldsLookup::class,'fieldsupervisor_id','id');
     }
 }
+
+

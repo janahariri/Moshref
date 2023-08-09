@@ -16,7 +16,7 @@ class Record extends Model
         'order_status',
         'fieldsupervisor_id',
         'techsupervisor_id',
-        'cmap_label',
+        'camp_label',
         'office_number',
     ];
 

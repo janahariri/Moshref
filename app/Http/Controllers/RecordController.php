@@ -21,7 +21,7 @@ class RecordController extends Controller
                 'order_status'=> 'required|string',
                 'fieldsupervisor_id'=> 'required|integer',
                 'techsupervisor_id'=> 'required|integer',
-                'cmap_label'=> 'required|string',
+                'camp_label'=> 'required|string',
                 'office_number'=> 'required|integer',
             ]);
 
@@ -38,7 +38,7 @@ class RecordController extends Controller
                 'order_status'=> $request->order_status,
                 'fieldsupervisor_id'=> $request->fieldsupervisor_id,
                 'techsupervisor_id'=> $request->techsupervisor_id,
-                'cmap_label'=> $request->cmap_label,
+                'camp_label'=> $request->camp_label,
                 'office_number'=> $request->office_number,
             ]);
 

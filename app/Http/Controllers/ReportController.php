@@ -65,11 +65,12 @@ class ReportController extends Controller
     }
 
 
+
     public function show(Request $request){
 
-        $user = auth()->user();
+        $user = auth('sanctum')->user();
 
-        switch ($request->header('type')) {
+       switch ($request->header('type')) {
 
         case 'Recorded':
             if($user->isTechsupervisor()){

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTechsupervisoridFieldsupervisoridTable extends Migration
+class CreateTechFieldsLookupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTechsupervisoridFieldsupervisoridTable extends Migration
      */
     public function up()
     {
-        Schema::create('techsupervisorid_fieldsupervisorid', function (Blueprint $table) {
+        Schema::create('tech_fields_lookup', function (Blueprint $table) {
             $table->id()->unique();
             $table->unsignedBigInteger('techsupervisor_id');
             $table->unsignedBigInteger('fieldsupervisor_id');
@@ -28,6 +28,6 @@ class CreateTechsupervisoridFieldsupervisoridTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('techsupervisorid_fieldsupervisorid');
+        Schema::dropIfExists('tech_fieldsu_lookup');
     }
 }

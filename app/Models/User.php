@@ -59,13 +59,13 @@ class User extends Authenticatable
     }
 
     public function Techsupervisor_id_users(){
-        return $this->hasMany(TechsupervisoridFieldsupervisorid::class,'techsupervisor_id','id');
+        return $this->hasMany(TechFieldsLookup::class,'techsupervisor_id','id');
     }
     public function Fieldsupervisor_id_users(){
-        return $this->hasMany(TechsupervisoridFieldsupervisorid::class,'fieldsupervisor_id','id');
+        return $this->hasMany(TechFieldsLookup::class,'fieldsupervisor_id','id');
     }
     public function isTechsupervisor(){
-        $count = TechsupervisoridFieldsupervisorid::where('techsupervisor_id',$this->id)->count();
+        $count = TechFieldsLookup::where('techsupervisor_id',$this->id)->count();
         if ($count > 0) {
             return true;
         } else {
@@ -73,7 +73,7 @@ class User extends Authenticatable
         }
     }
     public function isFieldsupervisor(){
-        $count = TechsupervisoridFieldsupervisorid::where('fieldsupervisor_id',$this->id)->count();
+        $count = TechFieldsLookup::where('fieldsupervisor_id',$this->id)->count();
         if ($count > 0) {
             return true;
         } else {
