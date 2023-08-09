@@ -23,6 +23,8 @@ Route::post('record/update',[RecordController::class,'update']);
 
 Route::post('report/store',[ReportController::class,'store']);
 
+Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -40,8 +42,6 @@ Route::get('record/show',[RecordController::class,'show']);
 
 Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
 Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
-Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
-
 
 
 Route::get('report/show',[ReportController::class,'show']);

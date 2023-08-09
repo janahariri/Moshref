@@ -3,8 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\RecordQuestion;
 
 class RecordQuestionController extends Controller
 {
-    //
+    public function store(Request $request)
+    {
+        try {
+            $validateRecord = Validator::make($request->all(),
+            [
+                'content'=> 'required|string',
+                'type_id'=> 'required|integer',
+            ]);
+
+            if($validateRecord->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateRecord->errors()
+                ], 401);
+            }
+
+            $Record = RecordQuestion::create([
+                'content' => $request->content,
+                'type_id'=> $request->type_id,
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Record Question Created Successfully',
+                'token' => $Record->createToken("API TOKEN")->plainTextToken
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
 }
