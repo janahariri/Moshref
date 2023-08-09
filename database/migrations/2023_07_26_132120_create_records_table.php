@@ -22,7 +22,6 @@ class CreateRecordsTable extends Migration
             $table->string('cmap_label');
             $table->integer('office_number');
             $table->timestamps();
-
         });
     }
 

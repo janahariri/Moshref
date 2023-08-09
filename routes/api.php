@@ -25,6 +25,7 @@ Route::post('report/store',[ReportController::class,'store']);
 
 Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
 Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
+Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -41,11 +42,8 @@ Route::get('record/show',[RecordController::class,'show']);
 
 //-------------------------لسع ما سار----------------------------------
 
-Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
-
-
 Route::get('report/show',[ReportController::class,'show']);
-Route::get('record/showAnalysis',[RecordController::class,'showAnalysis']);
+Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
 
 Route::get('recordAnswer/show',[RecordAnswerController::class,'show']);
 Route::get('recordQuestion/show',[RecordQuestionController::class,'show']);

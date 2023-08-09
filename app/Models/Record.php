@@ -29,6 +29,10 @@ class Record extends Model
     }
 
     public function reportAnswers(){
-        return $this->hasMany(ReportAnswer::class);
+        return $this->hasMany(ReportAnswer::class ,'report_id','id');
+    }
+
+    public function recordAnswers(){
+        return $this->hasMany(RecordAnswer::class ,'record_id','id');
     }
 }

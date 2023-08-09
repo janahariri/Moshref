@@ -64,4 +64,20 @@ class User extends Authenticatable
     public function Fieldsupervisor_id_users(){
         return $this->hasMany(TechsupervisoridFieldsupervisorid::class,'fieldsupervisor_id','id');
     }
+    public function isTechsupervisor(){
+        $count = TechsupervisoridFieldsupervisorid::where('techsupervisor_id',$this->id)->count();
+        if ($count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function isFieldsupervisor(){
+        $count = TechsupervisoridFieldsupervisorid::where('fieldsupervisor_id',$this->id)->count();
+        if ($count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

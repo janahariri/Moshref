@@ -63,4 +63,83 @@ class ReportController extends Controller
             ], 500);
         }
     }
+
+
+    public function show(Request $request){
+
+        $user = auth()->user();
+
+        switch ($request->header('type')) {
+
+        case 'Recorded':
+            if($user->isTechsupervisor()){
+                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                ->where('order_status','Sent')->get();
+            }else{
+                $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                ->where('order_status','Sent')->whereHas('recordAnswers')->get();
+            }
+            break;
+
+        case 'Ignored':
+            if($user->isTechsupervisor()){
+                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                ->where('order_status','Ignored')->get();
+            }
+
+            break;
+        default:
+
+        if($user->isTechsupervisor()){
+            $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+            ->where('order_status','Not viewed')->get();
+        }else{
+            $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+            ->where('order_status','Sent ')->get();
+        }
+
+            break;
+    }
+            return response()->json([
+            'data' =>$reportdata
+             ]);
+    }
+
+
+
+    public function index($id){
+
+        $reportdata = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->get();
+        return response()->json([
+            'data' =>$reportdata
+             ]);
+    }
+
+
+
+    public function showanalysis(){
+
+        $all=Record::count();
+        $ReportsNotViewedPercentage=Record::where('order_status', 'Not viewed')->count() * 100/$all;
+        $ReportsIgnoredPercentage=Record::where('order_status', 'Ignored')->count() * 100/$all;
+        $ReportsSentPercentage=Record::where('order_status', 'Sent')->count() * 100/$all;
+        $RecordsRecordedPercentage=Record::where('order_status', 'Recorded')->count() * 100/$all;
+
+        $ReportsNotViewed=Record::where('order_status', 'Not viewed')->count();
+        $ReportsIgnored=Record::where('order_status', 'Ignored')->count();
+        $ReportsSent=Record::where('order_status', 'Sent')->count();
+        $RecordsRecorded=Record::where('order_status', 'Recorded')->count();
+
+        return response()->json([
+            'ReportsNotViewedPercentage' =>$ReportsNotViewedPercentage,
+            'ReportsIgnoredPercentage' =>$ReportsIgnoredPercentage,
+            'ReportsSentPercentage' =>$ReportsSentPercentage,
+            'RecordsRecordedPercentage' =>$RecordsRecordedPercentage,
+
+            'ReportsNotViewed' =>$ReportsNotViewed,
+            'ReportsIgnored' =>$ReportsIgnored,
+            'ReportsSent' =>$ReportsSent,
+            'RecordsRecorded' =>$RecordsRecorded,
+             ]);
+    }
 }

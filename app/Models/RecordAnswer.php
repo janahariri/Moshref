@@ -19,7 +19,7 @@ class RecordAnswer extends Model
 
 
     public function RecordQuestion(){
-        return $this->belongsTo(RecordQuestion::class);
+        return $this->belongsTo(RecordQuestion::class,'question_id','id');
     }
 }
 

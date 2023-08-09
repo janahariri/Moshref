@@ -19,10 +19,9 @@ class RecordQuestion extends Model
 
 
     public function recordAnswers(){
-        return $this->hasMany(RecordAnswer::class);
+        return $this->hasMany(RecordAnswer::class,'id','question_id');
     }
-
     public function questionsRecordsTypes(){
-        return $this->hasMany(QuestionRecordType::class);
+        return $this->hasMany(QuestionsRecordsTypes::class);
     }
 }

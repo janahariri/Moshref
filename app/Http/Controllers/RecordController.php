@@ -67,58 +67,6 @@ class RecordController extends Controller
             'message' =>"Order Status updated Successfully",
         ], 200);
     }
-
-
-
-    public function show(Request $request){
-
-        $user = auth()->user();
-
-        switch ($request->header('type')) {
-
-        case 'Recorded':
-            if($user->isTechsupervisor()){
-                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
-                ->where('order_status','Sent')->get();
-            }else{
-                $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
-                ->where('order_status','Sent')->whereHas('recordAnswers')->get();
-            }
-            break;
-
-        case 'Ignored':
-            if($user->isTechsupervisor()){
-                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
-                ->where('order_status','Ignored')->get();
-            }
-
-            break;
-        default:
-
-        if($user->isTechsupervisor()){
-            $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
-            ->where('order_status','Not viewed')->get();
-        }else{
-            $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
-            ->where('order_status','Sent ')->get();
-        }
-
-            break;
-    }
-            return response()->json([
-            'data' =>$reportdata
-             ]);
-    }
-
-
-
-
-    public function index(Request $request){
-
-
-    }
-
-
 }
 
 
@@ -164,11 +112,4 @@ class RecordController extends Controller
               return ("The Enterd Order Status Are not defined");
          }
      }
-
-
-
-    public function showanalysis($id){
-
-    }
-
 */
