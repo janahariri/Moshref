@@ -120,10 +120,10 @@ class ReportController extends Controller
     public function showanalysis(){
 
         $all=Record::count();
-        $ReportsNotViewedPercentage=Record::where('order_status', 'Not viewed')->count() * 100/$all;
-        $ReportsIgnoredPercentage=Record::where('order_status', 'Ignored')->count() * 100/$all;
-        $ReportsSentPercentage=Record::where('order_status', 'Sent')->count() * 100/$all;
-        $RecordsRecordedPercentage=Record::where('order_status', 'Recorded')->count() * 100/$all;
+        $ReportsNotViewedPercentage=round(Record::where('order_status', 'Not viewed')->count() * 100/$all);
+        $ReportsIgnoredPercentage=round(Record::where('order_status', 'Ignored')->count() * 100/$all);
+        $ReportsSentPercentage=round(Record::where('order_status', 'Sent')->count() * 100/$all);
+        $RecordsRecordedPercentage=round(Record::where('order_status', 'Recorded')->count() * 100/$all);
 
         $ReportsNotViewed=Record::where('order_status', 'Not viewed')->count();
         $ReportsIgnored=Record::where('order_status', 'Ignored')->count();
