@@ -61,7 +61,10 @@ class RecordController extends Controller
 
     public function update(Request $request, $report_id){
         $Record = Record::where('id', $report_id)->first();
+
         $Record->order_status = $request->order_status;
+
+
         $Record->save();
         return response()->json([
             'status' => true,

@@ -66,7 +66,7 @@ class ReportController extends Controller
 
 
 
-    public function show(Request $request){
+    public function index(Request $request){
 
        $user = auth('sanctum')->user();
        switch ($request->header('type')) {
@@ -99,21 +99,21 @@ class ReportController extends Controller
         }
 
             break;
+        }
+        return response()->json([
+        'data' =>$reportdata
+         ]);
     }
-            return response()->json([
-            'data' =>$reportdata
-             ]);
-    }
 
 
 
-    public function index($id){
+    public function show($id){
 
         $reportdata = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->get();
-        foreach($reportdata as $reda){
-        dd($reda);
+    //    foreach($reportdata as $reda){
+      //  dd($reda);
 
-        }
+        //}
         return response()->json([
             'data' =>$reportdata
              ]);
