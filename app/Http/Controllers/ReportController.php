@@ -110,6 +110,10 @@ class ReportController extends Controller
     public function index($id){
 
         $reportdata = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->get();
+        foreach($reportdata as $reda){
+        dd($reda);
+
+        }
         return response()->json([
             'data' =>$reportdata
              ]);

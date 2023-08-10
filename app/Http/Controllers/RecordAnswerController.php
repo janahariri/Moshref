@@ -9,6 +9,35 @@ use App\Models\RecordAnswer;
 class RecordAnswerController extends Controller
 {
 
+
+    public function store(Request $request){
+       // return($request->all());
+        foreach($request->answers as $answer){
+             RecordAnswer::create([
+                'record_id' =>$request->record_id,
+                'question_id' =>$answer["question_id"],
+                'content' =>$answer["content"],
+            ]);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
     public function store(Request $request)
     {
         try {
@@ -55,5 +84,4 @@ class RecordAnswerController extends Controller
             ], 500);
         }
     }
-
-}
+*/

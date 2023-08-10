@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\PersonalAccessToken;
+use App\Models\ReportAnswer;
 
 class RecordController extends Controller
 {
@@ -44,7 +45,7 @@ class RecordController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Report Created Successfully',
+                'message' => 'تم انشاء التقرير بنجاح',
                 'token' => $Record->createToken("API TOKEN")->plainTextToken
             ], 200);
 
@@ -57,19 +58,17 @@ class RecordController extends Controller
     }
 
 
-    public function update(Request $request){
-        $token = PersonalAccessToken::findToken($request->header("token"));
-        $Record = Record::find($token->tokenable->id);
+
+    public function update(Request $request, $report_id){
+        $Record = Record::where('id', $report_id)->first();
         $Record->order_status = $request->order_status;
         $Record->save();
         return response()->json([
             'status' => true,
-            'message' =>"Order Status updated Successfully",
+            'message' =>"تم تغيير حالة التقرير بنجاح",
         ], 200);
     }
 }
-
-
 
 
 

@@ -11,10 +11,15 @@ use App\Http\Controllers\RecordQuestionController;
 use App\Http\Controllers\questionsRecordsTypesController;
 use App\Http\Controllers\TechFieldsLookupController;
 
+
+Route::post('auth/login', [AuthController::class, 'loginUser']);
+
 //-------------------------مكتملة------------------------------------
 
+
+
 Route::post('auth/register', [AuthController::class, 'createUser']);
-Route::post('auth/login', [AuthController::class, 'loginUser']);
+
 
 Route::get('user/show',[AuthController::class,'show']);
 Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
@@ -25,7 +30,7 @@ Route::post('techFieldsLookup/store',[TechFieldsLookupController::class,'store']
 Route::post('report/store',[ReportController::class,'store']);
 
 Route::post('record/store',[RecordController::class,'store']);
-Route::post('record/update',[RecordController::class,'update']);
+Route::post('record/update/{report_id}',[RecordController::class,'update']);
 
 Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
 Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
