@@ -36,8 +36,8 @@ Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::clas
 Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
 Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
 
-Route::get('report/index',[ReportController::class,'show']);
-Route::get('report/show/{id}',[ReportController::class,'index']);
+Route::get('report/index',[ReportController::class,'index']);
+Route::get('report/show/{id}',[ReportController::class,'show']);
 Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
 
 
