@@ -41,7 +41,7 @@ class AuthController extends Controller
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'فشلت المصادقة على البيانات',
                     'errors' => $validateUser->errors()
                 ], 401);
             }
@@ -66,7 +66,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'User Created Successfully',
+                'message' => 'تم انشاء المستخدم بنجاح',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
@@ -95,7 +95,7 @@ class AuthController extends Controller
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'فشلت المصادقة على البيانات',
                     'errors' => $validateUser->errors()
                 ], 401);
             }
@@ -103,7 +103,7 @@ class AuthController extends Controller
             if(!Auth::attempt($request->only(['national_id', 'password']))){
                 return response()->json([
                     'status' => false,
-                    'message' => 'national_id & Password does not match with our record.',
+                    'message' => 'الهوية الوطنية أو كلمة المرور لا يتطابق مع البيانات المسجلة',
                 ], 401);
             }
 
@@ -111,7 +111,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'User Logged In Successfully',
+                'message' => 'تم تسجيل الدخول بنجاح',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
@@ -136,7 +136,7 @@ class AuthController extends Controller
         $user->save();
         return response()->json([
             'status' => true,
-            'message' =>"password updated Successfully",
+            'message' =>"تم تحديث كلمة المرور بنجاح",
         ], 200);
     }
 
@@ -168,7 +168,7 @@ class AuthController extends Controller
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'فشلت المصادقة على البيانات',
                     'errors' => $validateUser->errors()
                 ], 401);
             }
@@ -178,7 +178,7 @@ class AuthController extends Controller
             if(is_null($user)){
                return response()->json([
                 'status' => false,
-                'message' => 'Email does not match with our record',
+                'message' => 'البريد الالكتروني لا يتطابق مع البيانات المسجلة',
                 'errors' => $validateUser->errors()
             ], 404);
             }
@@ -187,7 +187,7 @@ class AuthController extends Controller
             Mail::to($user->email)->send((new OTPMail($token,$user)));
             return response()->json([
                 'status' => true,
-                'message' =>'OK'
+                'message' =>'تم ارسال رمز التحقق إلى البريد المسجل'
             ], 200);
 
         } catch (\Throwable $th) {

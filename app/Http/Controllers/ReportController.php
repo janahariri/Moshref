@@ -74,10 +74,10 @@ class ReportController extends Controller
         case 'Recorded':
             if($user->isTechsupervisor()){
                 $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
-                ->where('order_status','Sent')->get();
+                ->where('order_status','Recorded')->get();
             }else{
                 $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
-                ->where('order_status','Sent')->whereHas('recordAnswers')->get();
+                ->where('order_status','Recorded')->whereHas('recordAnswers')->get();
             }
             break;
 
@@ -85,8 +85,11 @@ class ReportController extends Controller
             if($user->isTechsupervisor()){
                 $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
                 ->where('order_status','Ignored')->get();
+            }else{
+                return response()->json([
+                    'message' =>'لا يوجد تقارير متجاهلة',
+                     ]);
             }
-
             break;
         default:
 
@@ -109,13 +112,25 @@ class ReportController extends Controller
 
     public function show($id){
 
-        $reportdata = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->get();
-    //    foreach($reportdata as $reda){
-      //  dd($reda);
+        $report = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->first();
 
-        //}
+        $data = [];
+$note='';
+$image='';
+        foreach($report->reportAnswers as $key=> $reportAnswer){
+           if( $reportAnswer->type == 'text'){
+            $report->note = $reportAnswer->answers;
+            unset($report->reportAnswers[$key]);
+    }
+
+            if($reportAnswer->type == 'image'){
+                $report->image = $reportAnswer->answers;
+                unset($report->reportAnswers[$key]);
+            }
+
+        }
         return response()->json([
-            'data' =>$reportdata
+            'data' =>$report
              ]);
     }
 
