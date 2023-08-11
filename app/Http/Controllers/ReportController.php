@@ -127,18 +127,18 @@ class ReportController extends Controller
             }
 
         }
-//         foreach($report->recordAnswers as $key=> $recordAnswers){
-//  //           dd($recordAnswers->$question_id->type_id);
-//             if($recordAnswers->whereHas(RecordQuestion) == 'text'){
-//              $report->note = $recordAnswers->content;
-//              unset($report->recordAnswers[$key]);
-//      }
-//             //  if($recordAnswers->$question_id->type_id == 'image'){
-//             //      $report->image = $recordAnswers->content;
-//             //      unset($report->recordAnswers[$key]);
-//             //  }
+    //     foreach($report->recordAnswers as $key=> $recordAnswers){
+    //        dd($recordAnswers->$question_id->type_id);
+    //         if($recordAnswers->whereHas(RecordQuestion) == 'text'){
+    //          $report->note = $recordAnswers->content;
+    //          unset($report->recordAnswers[$key]);
+    //  }
+    //          if($recordAnswers->$question_id->type_id == 'image'){
+    //              $report->image = $recordAnswers->content;
+    //              unset($report->recordAnswers[$key]);
+    //          }
 
-//          }
+    //      }
 
         return response()->json([
             'data' =>$report

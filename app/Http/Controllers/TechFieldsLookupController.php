@@ -45,4 +45,37 @@ class TechFieldsLookupController extends Controller
                 ], 500);
             }
         }
+
+
+
+    public function show(Request $request){
+         $user = auth('sanctum')->user();
+         switch ($request->header('type')) {
+
+     case 'Sent':
+         if($user->isTechsupervisor()){
+             $reportdata = Record::where('techsupervisor_id', $user->id )->where('order_status','Sent')->first();
+             $fieldNames = TechFieldsLookup::where('techsupervisor_id' , 'fieldsupervisor_id');
+         }else{
+            return response()->json([
+                'message' => 'لا يمكنك إرسال التقارير',
+                 ]);
+         }break;
+
+     return response()->json([
+     'data' =>$reportdata,
+     'Send_to' =>$fieldNames,
+      ]);
     }
+  }
+}
+
+
+    //     $token = PersonalAccessToken::findToken($request->header("token"));
+
+    //     $user = User::select("personal_photo", "full_name", "national_id", "phone_number", "email")->find($token->tokenable);
+    //     return response()->json([
+    //     'status' => true,
+    //     'data' =>$user
+    // ], 200);
+    // }

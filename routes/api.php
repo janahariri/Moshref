@@ -26,6 +26,7 @@ Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
 Route::post('user/update',[AuthController::class,'update']);
 
 Route::post('techFieldsLookup/store',[TechFieldsLookupController::class,'store']);
+Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
 
 Route::post('report/store',[ReportController::class,'store']);
 
