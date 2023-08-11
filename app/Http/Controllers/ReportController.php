@@ -73,17 +73,17 @@ class ReportController extends Controller
 
         case 'Recorded':
             if($user->isTechsupervisor()){
-                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime', 'order_status')
                 ->where('order_status','Recorded')->get();
             }else{
-                $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime', 'order_status')
                 ->where('order_status','Recorded')->whereHas('recordAnswers')->get();
             }
             break;
 
         case 'Ignored':
             if($user->isTechsupervisor()){
-                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+                $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime','order_status')
                 ->where('order_status','Ignored')->get();
             }else{
                 return response()->json([
@@ -94,10 +94,10 @@ class ReportController extends Controller
         default:
 
         if($user->isTechsupervisor()){
-            $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+            $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime', 'order_status')
             ->where('order_status','Not viewed')->get();
         }else{
-            $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime')
+            $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime', 'order_status')
             ->where('order_status','Sent ')->get();
         }
 
@@ -112,23 +112,34 @@ class ReportController extends Controller
 
     public function show($id){
 
-        $report = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->first();
-
+        $report = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion.questionsRecordsTypes')->first();
         $data = [];
-$note='';
-$image='';
+        $note='';
+        $image='';
         foreach($report->reportAnswers as $key=> $reportAnswer){
            if( $reportAnswer->type == 'text'){
             $report->note = $reportAnswer->answers;
             unset($report->reportAnswers[$key]);
     }
-
             if($reportAnswer->type == 'image'){
                 $report->image = $reportAnswer->answers;
                 unset($report->reportAnswers[$key]);
             }
 
         }
+        foreach($report->recordAnswers as $key=> $recordAnswers){
+ //           dd($recordAnswers->$question_id->type_id);
+            if($recordAnswers->whereHas(RecordQuestion) == 'text'){
+             $report->note = $recordAnswers->content;
+             unset($report->recordAnswers[$key]);
+     }
+            //  if($recordAnswers->$question_id->type_id == 'image'){
+            //      $report->image = $recordAnswers->content;
+            //      unset($report->recordAnswers[$key]);
+            //  }
+
+         }
+
         return response()->json([
             'data' =>$report
              ]);
