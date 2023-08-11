@@ -112,7 +112,7 @@ class ReportController extends Controller
 
     public function show($id){
 
-        $report = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion.questionsRecordsTypes')->first();
+        $report = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->first();
         $data = [];
         $note='';
         $image='';
