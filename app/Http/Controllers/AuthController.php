@@ -207,14 +207,16 @@ class AuthController extends Controller
 
             $token =mt_rand(1000,9999);
             Mail::to($user->email)->send((new OTPMail($token,$user)));
+
+            $user->update([
+                'OTP_password' =>  $token,
+                ]);
+
             return response()->json([
                 'status' => true,
                 'message' =>'تم ارسال رمز التحقق إلى البريد المسجل'
             ], 200);
 
-            $user->update([
-            'OTP_password' =>  $token,
-            ]);
 
         } catch (\Throwable $th) {
             return response()->json([
@@ -246,7 +248,6 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if($user->OTP_password != $request->otp){
-
             return response()->json([
                 'status' => false,
                 'message' => 'الرقم المدخل غير صحيح',
