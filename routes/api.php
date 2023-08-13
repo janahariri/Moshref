@@ -27,6 +27,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('report/show/{id}',[ReportController::class,'show']);
     Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
 
+    Route::get('RecordQuestion/show',[RecordQuestionController::class,'show']);
+
     Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
     Route::post('record/update/{report_id}',[RecordController::class,'update']);
 });
