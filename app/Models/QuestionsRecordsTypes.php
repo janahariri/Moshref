@@ -19,6 +19,6 @@ class QuestionsRecordsTypes extends Model
 
     use HasFactory;
     public function recordQuestion(){
-        return $this->belongsTo(RecordQuestion::class,'typeName','type_id');
+        return $this->hasMany(RecordQuestion::class,'typeName','type_id');
     }
 }

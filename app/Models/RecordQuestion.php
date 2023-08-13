@@ -22,6 +22,6 @@ class RecordQuestion extends Model
         return $this->hasMany(RecordAnswer::class,'id','question_id');
     }
     public function questionsRecordsTypes(){
-        return $this->hasMany(QuestionsRecordsTypes::class,'type_id','typeName');
+        return $this->belongsTo(QuestionsRecordsTypes::class,'type_id','id');
     }
 }

@@ -13,7 +13,7 @@ class questionsRecordsTypesController extends Controller
             try {
                 $validateRecord = Validator::make($request->all(),
                 [
-                    'typeName'=> 'required|string',
+                    'typeName'=> 'required',
                 ]);
 
                 if($validateRecord->fails()){
