@@ -20,7 +20,6 @@ class RecordController extends Controller
             [
                 'submit_datetime' => 'required',
                 'order_status'=> 'required|string',
-                'fieldsupervisor_id'=> 'integer',
                 'techsupervisor_id'=> 'required|integer',
                 'camp_label'=> 'required|string',
                 'office_number'=> 'required|integer',
