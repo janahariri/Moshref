@@ -8,6 +8,7 @@ use App\Models\TechFieldsLookup;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\User;
+use App\Models\Record;
 
 class TechFieldsLookupController extends Controller
 {
