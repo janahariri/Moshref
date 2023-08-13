@@ -74,7 +74,7 @@ class TechFieldsLookupController extends Controller
   public function storeFieldNameSender(Request $request){
 
          Record::where('id', $request->report_id)->update([
-            'fieldsupervisor_id' => $request["id"],
+            'fieldsupervisor_id' => $request->id,
         ]);
 
         return response()->json([
