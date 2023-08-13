@@ -112,7 +112,7 @@ class ReportController extends Controller
 
     public function show($id){
 
-        $report = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion')->first();
+        $report = Record::where('id', $id )->with('reportAnswers','recordAnswers.RecordQuestion.questionsRecordsTypes')->first();
         $data = [];
         $note='';
         $image='';
@@ -120,25 +120,24 @@ class ReportController extends Controller
            if( $reportAnswer->type == 'text'){
             $report->note = $reportAnswer->answers;
             unset($report->reportAnswers[$key]);
-    }
+            }
             if($reportAnswer->type == 'image'){
                 $report->image = $reportAnswer->answers;
                 unset($report->reportAnswers[$key]);
             }
 
         }
-    //     foreach($report->recordAnswers as $key=> $recordAnswers){
-    //        dd($recordAnswers->$question_id->type_id);
-    //         if($recordAnswers->whereHas(RecordQuestion) == 'text'){
-    //          $report->note = $recordAnswers->content;
-    //          unset($report->recordAnswers[$key]);
-    //  }
-    //          if($recordAnswers->$question_id->type_id == 'image'){
-    //              $report->image = $recordAnswers->content;
-    //              unset($report->recordAnswers[$key]);
-    //          }
+        foreach($report->recordAnswers as $key=> $recordAnswers){
+             if($recordAnswers->RecordQuestion->questionsRecordsTypes->typeName == 'text'){
+              $report->recordNote = $recordAnswers->content;
+              unset($report->recordAnswers[$key]);
+            }
+              if($recordAnswers->RecordQuestion->questionsRecordsTypes->typeName == 'image'){
+                  $report->recordImage = $recordAnswers->content;
+                  unset($report->recordAnswers[$key]);
+                }
 
-    //      }
+        }
 
         return response()->json([
             'data' =>$report
