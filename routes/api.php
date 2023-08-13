@@ -30,12 +30,13 @@ Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
 
 Route::post('report/store',[ReportController::class,'store']);
 
+Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
 Route::post('record/store',[RecordController::class,'store']);
 Route::post('record/update/{report_id}',[RecordController::class,'update']);
 
 Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
 Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
-Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
+
 
 Route::get('report/index',[ReportController::class,'index']);
 Route::get('report/show/{id}',[ReportController::class,'show']);

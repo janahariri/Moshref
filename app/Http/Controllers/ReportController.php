@@ -125,7 +125,6 @@ class ReportController extends Controller
                 $report->image = $reportAnswer->answers;
                 unset($report->reportAnswers[$key]);
             }
-
         }
         foreach($report->recordAnswers as $key=> $recordAnswers){
              if($recordAnswers->RecordQuestion->questionsRecordsTypes->typeName == 'text'){
@@ -136,9 +135,7 @@ class ReportController extends Controller
                   $report->recordImage = $recordAnswers->content;
                   unset($report->recordAnswers[$key]);
                 }
-
         }
-
         return response()->json([
             'data' =>$report
              ]);

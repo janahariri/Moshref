@@ -11,13 +11,16 @@ class RecordAnswerController extends Controller
 
 
     public function store(Request $request){
-       // return($request->all());
         foreach($request->answers as $answer){
              RecordAnswer::create([
                 'record_id' =>$request->record_id,
                 'question_id' =>$answer["question_id"],
                 'content' =>$answer["content"],
             ]);
+            return response()->json([
+                'message' => 'تم تسجيل البلاغ بنجاح',
+                 ]);
+
         }
     }
 }
