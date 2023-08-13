@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('user/show',[AuthController::class,'show']);
 
     Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
+    Route::get('techFieldsLookup/storeFieldNameSender',[TechFieldsLookupController::class,'storeFieldNameSender']);
 
     Route::get('report/index',[ReportController::class,'index']);
     Route::get('report/show/{id}',[ReportController::class,'show']);

@@ -65,5 +65,19 @@ class TechFieldsLookupController extends Controller
      'data' =>$fieldNames,
       ]);
     }
-  }
 
+
+
+
+
+  public function storeFieldNameSender(Request $request){
+
+         Record::create([
+            'fieldsupervisor_id' => $request["id"],
+        ]);
+
+        return response()->json([
+            'message' => 'تم ارسال التقرير بنجاح',
+            ],200);
+    }
+}
