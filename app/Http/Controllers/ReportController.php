@@ -29,7 +29,7 @@ class ReportController extends Controller
             if($validateReportAnswer->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'فشلت المصادقة على البيانات',
                     'errors' => $validateReportAnswer->errors()
                 ], 401);
             }
@@ -52,7 +52,7 @@ class ReportController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Report Created Successfully',
+                'message' => 'تم انشاء التقرير بنجاح',
                 'token' => $ReportAnswer->createToken("API TOKEN")->plainTextToken
             ], 200);
 

@@ -19,7 +19,7 @@ class questionsRecordsTypesController extends Controller
                 if($validateRecord->fails()){
                     return response()->json([
                         'status' => false,
-                        'message' => 'validation error',
+                        'message' => 'فشلت المصادقة على البيانات',
                         'errors' => $validateRecord->errors()
                     ], 401);
                 }
@@ -30,7 +30,7 @@ class questionsRecordsTypesController extends Controller
 
                 return response()->json([
                     'status' => true,
-                    'message' => 'typeName Created Successfully',
+                    'message' => 'تم انشاء نوع البيانات بنجاح',
                     'token' => $typeName->createToken("API TOKEN")->plainTextToken
                 ], 200);
 

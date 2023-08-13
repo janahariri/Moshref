@@ -29,7 +29,7 @@ class RecordController extends Controller
             if($validateRecord->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'فشلت المصادقة على البيانات',
                     'errors' => $validateRecord->errors()
                 ], 401);
             }
@@ -60,11 +60,9 @@ class RecordController extends Controller
 
 
     public function update(Request $request, $report_id){
+
         $Record = Record::where('id', $report_id)->first();
-
         $Record->order_status = $request->order_status;
-
-
         $Record->save();
         return response()->json([
             'status' => true,
@@ -72,46 +70,3 @@ class RecordController extends Controller
         ], 200);
     }
 }
-
-
-
-
-
-
-
-
-/*
-
-    public function show(Request $request){
-
-        if ($request->header('order_status') == 'Not viewed'){
-            $record=DB::table('records')->where('order_status', $request->header('order_status'))->get();
-            return response()->json([
-            'records'=> $record
-            ]);
-         }
-
-         elseif ($request->header('order_status') == 'Ignored'){
-            $record=DB::table('records')->where('order_status',$request->header('order_status'))->get();
-            return response()->json([
-            'records'=> $record
-            ]);
-         }
-
-         elseif ($request->header('order_status') == 'Sent'){
-            $record=DB::table('records')->where('order_status',$request->header('order_status'))->get();
-            return response()->json([
-            'records'=> $record
-            ]);
-         }
-         elseif ($request->header('order_status') == 'Recorded') {
-            $record=DB::table('records')->where('order_status',$request->header('order_status'))->get();
-            return response()->json([
-            'records'=> $record
-            ]);
-         }
-         else {
-              return ("The Enterd Order Status Are not defined");
-         }
-     }
-*/

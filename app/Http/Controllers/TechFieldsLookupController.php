@@ -69,13 +69,3 @@ class TechFieldsLookupController extends Controller
     }
   }
 }
-
-
-    //     $token = PersonalAccessToken::findToken($request->header("token"));
-
-    //     $user = User::select("personal_photo", "full_name", "national_id", "phone_number", "email")->find($token->tokenable);
-    //     return response()->json([
-    //     'status' => true,
-    //     'data' =>$user
-    // ], 200);
-    // }

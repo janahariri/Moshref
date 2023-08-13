@@ -20,7 +20,7 @@ class RecordQuestionController extends Controller
             if($validateRecord->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'فشلت المصادقة على البيانات',
                     'errors' => $validateRecord->errors()
                 ], 401);
             }
@@ -32,7 +32,7 @@ class RecordQuestionController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Record Question Created Successfully',
+                'message' => 'تم انشاء اسئلة البلاغ بنجاح',
                 'token' => $Record->createToken("API TOKEN")->plainTextToken
             ], 200);
 
