@@ -103,7 +103,7 @@ class AuthController extends Controller
             if(!Auth::attempt($request->only(['national_id', 'password']))){
                 return response()->json([
                     'status' => false,
-                    'message' => 'الهوية الوطنية أو كلمة المرور لا يتطابق مع البيانات المسجلة',
+                    'message' => 'الهوية الوطنية أو كلمة المرور لا تتطابق مع البيانات المسجلة',
                 ], 401);
             }
 
@@ -147,7 +147,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($request->NewPassword);
         $user->save();
         return response()->json([
             'status' => true,
