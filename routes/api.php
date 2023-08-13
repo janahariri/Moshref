@@ -12,41 +12,45 @@ use App\Http\Controllers\questionsRecordsTypesController;
 use App\Http\Controllers\TechFieldsLookupController;
 
 
-Route::post('auth/login', [AuthController::class, 'loginUser']);
+
 
 //-------------------------مكتملة------------------------------------
+
+Route::middleware('auth:sanctum')->group(function(){
+
+    Route::get('user/show',[AuthController::class,'show']);
+
+    Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
+
+    Route::get('report/index',[ReportController::class,'index']);
+    Route::get('report/show/{id}',[ReportController::class,'show']);
+    Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
+
+    Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
+    Route::post('record/update/{report_id}',[RecordController::class,'update']);
+});
 
 
 
 Route::post('auth/register', [AuthController::class, 'createUser']);
+Route::post('auth/login', [AuthController::class, 'loginUser']);
 
-
-Route::get('user/show',[AuthController::class,'show']);
 Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
+Route::post('user/OTPpasswordVerification',[AuthController::class,'OTPpasswordVerification']);
 Route::post('user/update',[AuthController::class,'update']);
 
 Route::post('techFieldsLookup/store',[TechFieldsLookupController::class,'store']);
-Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
-
 Route::post('report/store',[ReportController::class,'store']);
-
-Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
 Route::post('record/store',[RecordController::class,'store']);
-Route::post('record/update/{report_id}',[RecordController::class,'update']);
-
 Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
 Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
 
 
-Route::get('report/index',[ReportController::class,'index']);
-Route::get('report/show/{id}',[ReportController::class,'show']);
-Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
-
-Route::post('user/OTPpasswordVerification',[AuthController::class,'OTPpasswordVerification']);
 
 
 
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-  //  return $request->user();
-//});
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+// });

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TechFieldsLookup;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\PersonalAccessToken;
+use App\Models\User;
 
 class TechFieldsLookupController extends Controller
 {
@@ -49,23 +50,20 @@ class TechFieldsLookupController extends Controller
 
 
     public function show(Request $request){
-         $user = auth('sanctum')->user();
-         switch ($request->header('type')) {
 
-     case 'Sent':
+        $user = auth('sanctum')->user();
          if($user->isTechsupervisor()){
-             $reportdata = Record::where('techsupervisor_id', $user->id )->where('order_status','Sent')->first();
-             $fieldNames = TechFieldsLookup::where('techsupervisor_id' , 'fieldsupervisor_id');
-         }else{
+             $fieldIds = TechFieldsLookup::where('techsupervisor_id' , $user->id)->pluck('fieldsupervisor_id');
+             $fieldNames = User::whereIn('id',  $fieldIds)->select('id', 'full_name')->get();
+
+            }else{
             return response()->json([
                 'message' => 'لا يمكنك إرسال التقارير',
                  ]);
-         }break;
-
+            }
      return response()->json([
-     'data' =>$reportdata,
-     'Send_to' =>$fieldNames,
+     'data' =>$fieldNames,
       ]);
     }
   }
-}
+
