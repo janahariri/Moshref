@@ -18,16 +18,16 @@ use App\Http\Controllers\TechFieldsLookupController;
 
 Route::middleware('auth:sanctum')->group(function(){
 
-    Route::get('user/show',[AuthController::class,'show']);
+Route::get('user/show',[AuthController::class,'show']);
 
-2- Route::get('report/index',[ReportController::class,'index']);
-3- Route::get('report/show/{id}',[ReportController::class,'show']);
-4- Route::post('record/update/{report_id}',[RecordController::class,'update']);
-6- Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
-7- Route::get('techFieldsLookup/storeFieldNameSender',[TechFieldsLookupController::class,'storeFieldNameSender']);
-10- Route::get('RecordQuestion/show',[RecordQuestionController::class,'show']);
-11- Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
-12- Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
+Route::get('report/index',[ReportController::class,'index']);
+Route::get('report/show/{id}',[ReportController::class,'show']);
+Route::post('record/update/{report_id}',[RecordController::class,'update']);
+Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
+Route::get('techFieldsLookup/storeFieldNameSender',[TechFieldsLookupController::class,'storeFieldNameSender']);
+Route::get('RecordQuestion/show',[RecordQuestionController::class,'show']);
+Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
+Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
 
 });
 
@@ -37,8 +37,8 @@ Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
 Route::post('user/OTPpasswordVerification',[AuthController::class,'OTPpasswordVerification']);
 Route::post('user/update',[AuthController::class,'update']);
 
-0- Route::post('record/store',[RecordController::class,'store']);
-1- Route::post('report/store',[ReportController::class,'store']);
-5- Route::post('techFieldsLookup/store',[TechFieldsLookupController::class,'store']);
-8- Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
-9- Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
+Route::post('record/store',[RecordController::class,'store']);
+Route::post('report/store',[ReportController::class,'store']);
+Route::post('techFieldsLookup/store',[TechFieldsLookupController::class,'store']);
+Route::post('recordQuestion/store',[RecordQuestionController::class,'store']);
+Route::post('questionsRecordsTypes/store',[questionsRecordsTypesController::class,'store']);
