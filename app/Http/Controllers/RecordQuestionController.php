@@ -49,7 +49,6 @@ class RecordQuestionController extends Controller
     public function show(Request $request){
 
         $user = RecordQuestion::select("id", "content", "type_id",)->find(auth()->user()->id)->get();
-
         return response()->json([
         'data' =>$user
     ], 200);

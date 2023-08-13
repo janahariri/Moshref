@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('user/show',[AuthController::class,'show']);
 
+//-------------------------------------------------------------
+
     Route::get('techFieldsLookup/show',[TechFieldsLookupController::class,'show']);
     Route::get('techFieldsLookup/storeFieldNameSender',[TechFieldsLookupController::class,'storeFieldNameSender']);
 
@@ -33,14 +35,18 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('record/update/{report_id}',[RecordController::class,'update']);
 });
 
-
-
+//-------------------------------------------------------------
 Route::post('auth/register', [AuthController::class, 'createUser']);
 Route::post('auth/login', [AuthController::class, 'loginUser']);
-
 Route::post('auth/OTPpassword', [AuthController::class, 'OTPpassword']);
 Route::post('user/OTPpasswordVerification',[AuthController::class,'OTPpasswordVerification']);
 Route::post('user/update',[AuthController::class,'update']);
+
+//--------------------------------------------------------------
+
+
+
+
 
 Route::post('techFieldsLookup/store',[TechFieldsLookupController::class,'store']);
 Route::post('report/store',[ReportController::class,'store']);
