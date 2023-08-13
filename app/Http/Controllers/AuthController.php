@@ -89,7 +89,7 @@ class AuthController extends Controller
             $validateUser = Validator::make($request->all(),
             [
                 'national_id' => 'required',
-                'password' => 'required'
+                'password' => 'required',
             ]);
 
             if($validateUser->fails()){
@@ -130,16 +130,38 @@ class AuthController extends Controller
     public function update(Request $request)
     {
 
-        $token = PersonalAccessToken::findToken($request->header("token"));
-        $user = User::find($token->tokenable->id);
+        try {
+            $validateUser = Validator::make($request->all(),
+            [
+                'email' => 'required',
+                'NewPassword' => 'required',
+            ]);
+
+            if($validateUser->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'فشلت المصادقة على البيانات',
+                    'errors' => $validateUser->errors()
+                ], 400);
+            }
+
+        $user = User::where('email', $request->email)->first();
+
         $user->password = Hash::make($request->password);
         $user->save();
         return response()->json([
             'status' => true,
             'message' =>"تم تحديث كلمة المرور بنجاح",
         ], 200);
-    }
 
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status' => false,
+            'message' => $th->getMessage()
+        ], 500);
+
+    }
+}
 
 
 
@@ -190,6 +212,10 @@ class AuthController extends Controller
                 'message' =>'تم ارسال رمز التحقق إلى البريد المسجل'
             ], 200);
 
+            $user->update([
+            'OTP_password' =>  $token,
+            ]);
+
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -197,6 +223,48 @@ class AuthController extends Controller
             ], 500);
 
             }
+    }
+
+
+    public function OTPpasswordVerification (Request $request){
+
+        try {
+            $validateUser = Validator::make($request->all(),
+            [
+                'otp' => 'required|integer',
+                'email' => 'required',
+            ]);
+
+            if($validateUser->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'الرجاء التحقق من المدخلات',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user->OTP_password != $request->otp){
+
+            return response()->json([
+                'status' => false,
+                'message' => 'الرقم المدخل غير صحيح',
+            ], 403);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' =>"تم تجاوز رقم التحقق بنجاح",
+        ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+
+        }
     }
 
 }

@@ -42,7 +42,7 @@ Route::get('report/index',[ReportController::class,'index']);
 Route::get('report/show/{id}',[ReportController::class,'show']);
 Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
 
-
+Route::post('user/OTPpasswordVerification',[AuthController::class,'OTPpasswordVerification']);
 
 
 
