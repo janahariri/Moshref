@@ -17,11 +17,10 @@ class RecordAnswerController extends Controller
                 'question_id' =>$answer["question_id"],
                 'content' =>$answer["content"],
             ]);
-            return response()->json([
-                'message' => 'تم تسجيل البلاغ بنجاح',
-                 ]);
-
         }
+        return response()->json([
+            'message' => 'تم تسجيل البلاغ بنجاح',
+            ],200);
     }
 }
 
