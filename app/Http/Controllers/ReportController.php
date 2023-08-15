@@ -69,7 +69,7 @@ class ReportController extends Controller
     public function index(Request $request){
 
        $user = auth('sanctum')->user();
-return($request->header('order_status'));
+return($request->headers_list);
        switch ($request->header('order_status')) {
 
         case 'Recorded':
