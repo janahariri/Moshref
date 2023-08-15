@@ -69,10 +69,11 @@ class ReportController extends Controller
     public function index(Request $request){
 
        $user = auth('sanctum')->user();
+return($request->header('order_status'));
        switch ($request->header('order_status')) {
 
         case 'Recorded':
-return('here');
+// return('here');
             if($user->isTechsupervisor()){
                 $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime', 'order_status')
                 ->where('order_status','Recorded')->get();
