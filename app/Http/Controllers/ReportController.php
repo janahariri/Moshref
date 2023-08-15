@@ -72,6 +72,7 @@ class ReportController extends Controller
        switch ($request->header('order_status')) {
 
         case 'Recorded':
+return('here');
             if($user->isTechsupervisor()){
                 $reportdata = Record::where('techsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime', 'order_status')
                 ->where('order_status','Recorded')->get();
