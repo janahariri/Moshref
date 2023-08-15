@@ -69,7 +69,7 @@ class ReportController extends Controller
     public function index(Request $request){
 
        $user = auth('sanctum')->user();
-       switch ($request->header('type')) {
+       switch ($request->header('order_status')) {
 
         case 'Recorded':
             if($user->isTechsupervisor()){
@@ -77,7 +77,7 @@ class ReportController extends Controller
                 ->where('order_status','Recorded')->get();
             }else{
                 $reportdata = Record::where('fieldsupervisor_id', $user->id )->select('id','office_number','camp_label','submit_datetime', 'order_status')
-                ->where('order_status','Recorded')/*->whereHas('recordAnswers')*/->get();
+                ->where('order_status','Recorded')->whereHas('recordAnswers')->get();
             }
             break;
 
