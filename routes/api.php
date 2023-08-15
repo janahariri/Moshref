@@ -19,7 +19,6 @@ use App\Http\Controllers\TechFieldsLookupController;
 Route::middleware('auth:sanctum')->group(function(){
 
 Route::get('user/show',[AuthController::class,'show']);
-
 Route::get('report/index',[ReportController::class,'index']);
 Route::get('report/show/{id}',[ReportController::class,'show']);
 Route::post('record/update/{report_id}',[RecordController::class,'update']);
@@ -28,7 +27,6 @@ Route::get('techFieldsLookup/storeFieldNameSender',[TechFieldsLookupController::
 Route::get('RecordQuestion/show',[RecordQuestionController::class,'show']);
 Route::post('recordAnswer/store',[RecordAnswerController::class,'store']);
 Route::get('report/showAnalysis',[ReportController::class,'showAnalysis']);
-
 });
 
 Route::post('auth/register', [AuthController::class, 'createUser']);

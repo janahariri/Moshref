@@ -50,35 +50,36 @@ class TechFieldsLookupController extends Controller
 
 
 
-    public function show(Request $request){
+    // public function show(Request $request){
 
-        $user = auth('sanctum')->user();
-         if($user->isTechsupervisor()){
-             $fieldIds = TechFieldsLookup::where('techsupervisor_id' , $user->id)->pluck('fieldsupervisor_id');
-             $fieldNames = User::whereIn('id',  $fieldIds)->select('id', 'full_name')->get();
+    //     $user = auth('sanctum')->user();
+    //      if($user->isTechsupervisor()){
+    //          $fieldIds = TechFieldsLookup::where('techsupervisor_id' , $user->id)->pluck('fieldsupervisor_id');
+    //          $fieldNames = User::whereIn('id',  $fieldIds)->select('id', 'full_name')->get();
 
-            }else{
-            return response()->json([
-                'message' => 'لا يمكنك إرسال التقارير',
-                 ]);
-            }
-     return response()->json([
-     'data' =>$fieldNames,
-      ]);
-    }
-
-
+    //         }else{
+    //         return response()->json([
+    //             'message' => 'لا يمكنك إرسال التقارير',
+    //              ]);
+    //         }
+    //  return response()->json([
+    //  'data' =>$fieldNames,
+    //   ]);
+    // }
 
 
 
-  public function storeFieldNameSender(Request $request){
 
-         Record::where('id', $request->report_id)->update([
-            'fieldsupervisor_id' => $request->id,
-        ]);
 
-        return response()->json([
-            'message' => 'تم ارسال التقرير بنجاح',
-            ],200);
-    }
+//   public function storeFieldNameSender(Request $request){
+
+//          Record::where('id', $request->report_id)->update([
+//             'fieldsupervisor_id' => $request->id,
+//         ]);
+
+//         return response()->json([
+//             'message' => 'تم ارسال التقرير بنجاح',
+//             ],200);
+//     }
+
 }
